@@ -1,9 +1,12 @@
-from BeautifulSoup import BeautifulSoup
+#from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import numpy as np
 
 def distance_matrix(xml_fname):
-    f = file(xml_fname)
-    bs = BeautifulSoup(f.read())
+    #f = file(xml_fname)
+    f = open(xml_fname,"r") 
+    #bs = BeautifulSoup(f.read())
+    bs = BeautifulSoup(f.read(),features="lxml")
     vertices = bs.graph.findAll("vertex")
     
     n = len(vertices)
@@ -14,5 +17,7 @@ def distance_matrix(xml_fname):
         for edge in vertex.findAll("edge"):
             j = int(edge.text)
             distances[i,j] = float(edge.get("cost"))
+    
     f.close()
+    
     return distances
