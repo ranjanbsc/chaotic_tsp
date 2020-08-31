@@ -29,19 +29,19 @@ best_tour = None
 
 for i in range(1000):
     tour = range(n)
-    np.random.shuffle(tour)
+    np.random.shuffle(list(tour))
     l = tour_length(tour, distances)
     lens.append(l)
     #print(l)
 
     if best_tour is None:
         best_tour = (tour, l)
-        print(best_tour)
+        print("if: ", best_tour)
     else:
         if l < best_tour[1]:
             t = tour
             best_tour = (t, l)
-            print(best_tour)
+            print("else: ", best_tour)
 
 plt.hist(lens, bins=20)
 plt.show()
